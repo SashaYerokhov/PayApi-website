@@ -1,0 +1,122 @@
+:root {
+  --neutral-950: hsl(0, 0%, 0%);
+  --neutral-300: hsl(0, 0%, 85%);
+  --neutral-0: hsl(0, 0%, 100%);
+  --slate-950: hsl(207, 27%, 15%);
+  --slate-900: hsl(208, 37%, 21%);
+  --slate-800: hsl(207, 25%, 24%);
+  --slate-700: hsl(207, 33%, 32%);
+  --slate-600: hsl(208, 29%, 45%);
+  --slate-500: hsl(207, 16%, 50%);
+  --slate-100: hsl(207, 44%, 95%);
+  --slate-50: hsl(220, 60%, 99%);
+  --rose-600: hsl(337, 48%, 49%);
+  --rose-400: hsl(337, 60%, 64%);
+  --red-600: hsl(0, 100%, 50%);
+  --green-900: hsl(162, 18%, 22%);
+}
+@font-face {
+    font-family: 'DM Serif Display';
+    src: url('../assets/fonts/DMSerifDisplay-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../assets/fonts/PublicSans-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../assets/fonts/PublicSans-Bold_1.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../assets/fonts/PublicSans-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+body {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0;
+  margin-inline: auto;
+  padding: 0;
+  font-family: 'Public Sans';
+  /* background-color: hsl(0, 0%, 95%); */
+  background-color: var(--slate-100);
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+button {
+  border: 0 none transparent;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+.container {
+  max-width: 70.625rem;
+  margin-inline: auto;
+  padding-inline: 0.625rem;
+}
+
+/* 
+
+
+width: 124px;
+height: 18px;
+
+
+font-family: 'Public Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 15px;
+line-height: 120%;
+
+
+color: #FBFCFE;
+
+
+
+
+
+
+*/
