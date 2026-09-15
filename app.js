@@ -1,80 +1,93 @@
+
 const body = document.querySelector("body");
-const buttons = document.querySelectorAll(".menu__button");
-const open = document.querySelector(".open__button");
-const close = document.querySelector(".close__button");
-// console.log(body, buttons, open, close);
-function menuToggle() {
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const isActive = body.classList.toggle("menu__active");
-      if (isActive) {
-        open.setAttribute("aria-expanded", "true");
-      } else {
-        open.setAttribute("aria-expanded", "false");
-      }
-    });
-  });
+const openButton = document.querySelector(".open__button");
+const closeButton = document.querySelector(".close__button");
+
+// Функция для обновления aria-атрибутов на ВСЕХ кнопках управления меню
+function updateMenuAttributes(isOpen) {
+  const state = isOpen ? "true" : "false";
+  openButton.setAttribute("aria-expanded", state);
+  closeButton.setAttribute("aria-expanded", state);
 }
 
-function escapeMenu() {
+function initMenu() {
+  // Закрытие и открытие по клику на соответствующие кнопки
+  openButton.addEventListener("click", () => {
+    body.classList.add("menu__active");
+    updateMenuAttributes(true);
+    // А11у-бонус: переводим фокус на кнопку закрытия или первую ссылку внутри меню
+    closeButton.focus(); 
+  });
+
+  closeButton.addEventListener("click", () => {
+    body.classList.remove("menu__active");
+    updateMenuAttributes(false);
+    // А11у-бонус: возвращаем фокус на кнопку открытия, чтобы пользователь не потерялся
+    openButton.focus(); 
+  });
+
+  // Закрытие по кнопке Escape
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && body.classList.contains("menu__active")) {
       body.classList.remove("menu__active");
-      open.setAttribute("aria-expanded", "false");
+      updateMenuAttributes(false);
+      openButton.focus(); // Возвращаем фокус
     }
   });
 }
+
 document.addEventListener("DOMContentLoaded", () => {
-  menuToggle();
-  escapeMenu();
+  initMenu();
 });
 
 function emailValidate() {
-  const root = document.querySelector(".form__email");
-  if (!root) return;
+  const roots = document.querySelectorAll(".form__email");
+  if (!roots.length) return; // Проверяем, нашлись ли формы вообще
 
-  const emailInput = root.querySelector("#email");
-  const errorMsg = root.querySelector(".error-msg");
-  const emailSubmit = root.querySelector("#email-btn");
+  roots.forEach((root) => {
+    // Используем querySelector, так как внутри КАЖДОЙ формы только ОДИН input, ОДНА ошибка и ОДНА кнопка
+    const emailInput = root.querySelector('input[type="email"]') || root.querySelector('#email');
+    const errorMsg = root.querySelector(".error-msg");
+    const emailSubmit = root.querySelector(".email-btn") || root.querySelector("#email-btn");
 
-  // Улучшенное регулярное выражение для проверки email
-  const mailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // Защита: если в какой-то из форм не хватает элементов, пропускаем её, чтобы не было ошибок
+    if (!emailInput || !errorMsg || !emailSubmit) return;
 
-  // Функция для скрытия ошибки
-  function setValid() {
-    errorMsg.style.display = "none";
-    emailInput.style.borderColor = ""; // Сбрасываем к исходному стилю из CSS
-  }
+    // Регулярное выражение для проверки email
+    const mailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  // Функция для показа ошибки
-  function setInvalid() {
-    errorMsg.style.display = "block";
-    emailInput.style.borderColor = "red"; // Окрашиваем рамку в красный
-    // emailInput.style.borderColor = 'hsl(0, 100%, 50%)';
-  }
-
-  // Проверка при каждом вводе символа
-  emailInput.addEventListener("input", () => {
-    // Если поле пустое или email корректный — скрываем ошибку
-    if (emailInput.value === "" || mailRegex.test(emailInput.value)) {
-      setValid();
-    } else {
-      setInvalid();
+    // Функция для скрытия ошибки
+    function setValid() {
+      errorMsg.style.display = "none";
+      emailInput.style.borderColor = ""; 
     }
-  });
 
-  // Проверка при клике на кнопку отправки
-  emailSubmit.addEventListener("click", (event) => {
-    // Отменяем отправку формы для проверки
-    event.preventDefault();
-
-    // Если email не подходит под регулярное выражение
-    if (!mailRegex.test(emailInput.value)) {
-      setInvalid();
-    } else {
-      setValid();
-      // Здесь можно вызвать root.submit(), если нужно отправить форму
+    // Функция для показа ошибки
+    function setInvalid() {
+      errorMsg.style.display = "block";
+      emailInput.style.borderColor = "red"; 
     }
+
+    // Проверка при каждом вводе символа
+    emailInput.addEventListener("input", () => {
+      if (emailInput.value === "" || mailRegex.test(emailInput.value)) {
+        setValid();
+      } else {
+        setInvalid();
+      }
+    });
+
+    // Проверка при клике на кнопку отправки (теперь без forEach, так как кнопка одна внутри текущей формы)
+    emailSubmit.addEventListener("click", (event) => {
+      event.preventDefault(); // Отменяем отправку формы для проверки
+
+      if (!mailRegex.test(emailInput.value)) {
+        setInvalid();
+      } else {
+        setValid();
+        // Здесь можно отправить конкретную форму: root.submit();
+      }
+    });
   });
 }
 
