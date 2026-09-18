@@ -1,19 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon-32x32.png"
+    />
 
     <title>Frontend Mentor | PayAPI Website Challenge</title>
-        <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/normalize.css" />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
 
   <body>
-    <header class="header">
-            <div class="header__menu container">
+    <header class="header bg-up">
+      <div class="header__menu container">
         <div class="header__logo">
           <a href="index.html">
             <svg
@@ -89,8 +94,8 @@
                   />
                 </g>
               </g>
-            </svg>>
-            <span class="visually-hidden">PayAPI — Главная страница</span>
+            </svg>
+            <span class="visually-hidden">PayAPI — Cтраница Цен</span>
           </a>
         </div>
         <button
@@ -138,50 +143,73 @@
           <button type="button" class="btn">Schedule a Demo</button>
         </div>
       </div>
+      <h2>Pricing</h2>
     </header>
     <main class="main">
-
-    Pricing
-
-    Free Plan
-    Build and test using our core set of products with up to 100 API requests
-    $0.00
-    
-    Transactions
-    Auth
-    Identity
-    Investments
-    Assets
-    Liabilities
-    Income
-    Request Access
-
-    Basic Plan
-    Launch your project with unlimited requests and no contractual minimums
-    $249.00
-    
-    Transactions
-    Auth
-    Identity
-    Investments
-    Assets
-    Liabilities
-    Income
-    Request Access
-
-    Premium Plan
-    Get tailored solutions, volume pricing, and dedicated support for your team
-    $499.00
-    
-    Transactions
-    Auth
-    Identity
-    Investments
-    Assets
-    Liabilities
-    Income
-    Request Access
-
+      <section class="pricing container">
+        <!-- <div class="pricing__content"></div> -->
+          <div class="pricing__content">
+            <h4>Free Plan</h4>
+            <p>
+              Build and test using our core set of products with up to 100 API
+              requests
+            </p>
+            <p class="price">$0.00</p>
+            <span></span>
+            <ul>
+              <li>Transactions</li>
+              <li>Auth</li>
+              <li>Identity</li>
+              <li>Investments</li>
+              <li>Assets</li>
+              <li>Liabilities</li>
+              <li>Income</li>
+            </ul>
+            <span></span>
+            <button class="btn">Request Access</button>
+          </div>
+          <div class="pricing__content">
+            <h4>Basic Plan</h4>
+            <p>
+              Launch your project with unlimited requests and no contractual
+              minimums
+            </p>
+            <p class="price">$249.00</p>
+            <span></span>
+            <ul>
+              <li>Transactions</li>
+              <li>Auth</li>
+              <li>Identity</li>
+              <li>Investments</li>
+              <li>Assets</li>
+              <li>Liabilities</li>
+              <li>Income</li>
+            </ul>
+            <span></span>
+            <button class="btn">Request Access</button>
+          </div>
+          <div class="pricing__content">
+            <h4>Premium Plan</h4>
+            <p>
+              Get tailored solutions, volume pricing, and dedicated support for
+              your team
+            </p>
+            <p class="price">$499.00</p>
+            <span></span>
+            <ul>
+              <li>Transactions</li>
+              <li>Auth</li>
+              <li>Identity</li>
+              <li>Investments</li>
+              <li>Assets</li>
+              <li>Liabilities</li>
+              <li>Income</li>
+            </ul>
+            <span></span>
+            <button class="btn">Request Access</button>
+          </div>
+        
+      </section>
     </main>
     <footer class="footer">
       <div class="footer__header container">
@@ -332,5 +360,4 @@
     </footer>
     <script src="app.js" defer></script>
   </body>
-
 </html>
