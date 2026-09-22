@@ -1,19 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon-32x32.png"
+    />
 
     <title>Frontend Mentor | PayAPI Website Challenge</title>
-        <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/normalize.css" />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
 
-  <body>
-    <header class="header">
-            <div class="header__menu container">
+  <body class="about-page">
+    <header class="header bg-up">
+      <div class="header__menu container">
         <div class="header__logo">
           <a href="index.html">
             <svg
@@ -90,7 +95,7 @@
                 </g>
               </g>
             </svg>
-            <span class="visually-hidden">PayAPI — Главная страница</span>
+            <span class="visually-hidden">PayAPI — Страница о компании</span>
           </a>
         </div>
         <button
@@ -138,42 +143,83 @@
           <button type="button" class="btn">Schedule a Demo</button>
         </div>
       </div>
+      <h2>
+        We empower innovators by delivering access to the financial system
+      </h2>
     </header>
     <main class="main">
-We empower innovators by delivering access to the financial system
-
-    Our Vision
-
-    Our main goal is to build beautiful consumer experiences along with developer-friendly 
-    infrastructure. The result is an intelligent tool that gives everyone the ability to create 
-    amazing products that solve big problems. We are deeply focused on democratizing financial 
-    services through technology.
-
-    Our Business
-
-    At the core of our platform is the technical infrastructure APIs that connect consumers. 
-    Our innovative product provides key insights for businesses and individuals, as well as 
-    robust reporting for traditional financial institutions and developers.
-
-    Team Members 
-    300+
-
-    Offices in the US 
-    3
-
-    Transactions analyzed 
-    10M+
-
-    The Culture
-
-    We strongly believe there's always an opportunity to learn from each other outside of 
-    day-to-day work, whether it's company-wide offsites, internal hackathons, or co-worker meetups. 
-    We always value cross-team collaboration and diversity of thought, no matter the job title.
-
-    The People
-    
-    We're all passionate about building a more efficient and inclusive financial infrastructure 
-    together. At PayAPI, we have diverse backgrounds and skills.
+      <section class="intro__about container">
+        <div class="intro__about-block">
+          <h4>Our Vision</h4>
+          <p>
+            Our main goal is to build beautiful consumer experiences along with
+            developer-friendly infrastructure. The result is an intelligent tool
+            that gives everyone the ability to create amazing products that
+            solve big problems. We are deeply focused on democratizing financial
+            services through technology.
+          </p>
+        </div>
+        <div class="intro__about-block">
+          <h4>Our Business</h4>
+          <p>
+            At the core of our platform is the technical infrastructure APIs
+            that connect consumers. Our innovative product provides key insights
+            for businesses and individuals, as well as robust reporting for
+            traditional financial institutions and developers.
+          </p>
+        </div>
+      </section>
+      <section class="about__content">
+        <picture class="about__picture">
+          <source
+            media="(min-width: 1024px)"
+            srcset="./assets/about/desktop/image-team-members.jpg"
+          />
+          <source
+            media="(min-width: 768px)"
+            srcset="./assets/about/tablet/image-team-members.jpg"
+          />
+          <img
+            src="./assets/about/mobile/image-team-members.jpg"
+            alt="image team members"
+            class="hero__img"
+          />
+        </picture>
+        <div class="content__stats">
+          <div class="content__stats-block">
+            <p>Team Members</p>
+            <strong>300+</strong>
+          </div>
+          <div class="content__stats-block">
+            <p>Offices in the US</p>
+            <strong>3</strong>
+          </div>
+          <div class="content__stats-block">
+            <p>Transactions analyzed</p>
+            <strong>10M+</strong>
+          </div>
+        </div>
+      </section>
+      <section class="intro__about container">
+        <div class="intro__about-block">
+          <h4>The Culture</h4>
+          <p>
+            We strongly believe there's always an opportunity to learn from each
+            other outside of day-to-day work, whether it's company-wide
+            offsites, internal hackathons, or co-worker meetups. We always value
+            cross-team collaboration and diversity of thought, no matter the job
+            title.
+          </p>
+        </div>
+        <div class="intro__about-block">
+          <h4>The People</h4>
+          <p>
+            We're all passionate about building a more efficient and inclusive
+            financial infrastructure together. At PayAPI, we have diverse
+            backgrounds and skills.
+          </p>
+        </div>
+      </section>
     </main>
     <footer class="footer">
       <div class="footer__header container">
@@ -324,5 +370,4 @@ We empower innovators by delivering access to the financial system
     </footer>
     <script src="app.js" defer></script>
   </body>
-
 </html>
