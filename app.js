@@ -2,7 +2,7 @@ const body = document.querySelector("body");
 const openButton = document.querySelector(".open__button");
 const closeButton = document.querySelector(".close__button");
 
-// Функция для обновления aria-атрибутов на ВСЕХ кнопках управления меню
+// Function to update aria attributes on ALL menu control buttons
 function updateMenuAttributes(isOpen) {
   const state = isOpen ? "true" : "false";
   openButton.setAttribute("aria-expanded", state);
@@ -10,27 +10,28 @@ function updateMenuAttributes(isOpen) {
 }
 
 function initMenu() {
-  // Закрытие и открытие по клику на соответствующие кнопки
+  // Closing and opening upon clicking the corresponding buttons
   openButton.addEventListener("click", () => {
     body.classList.add("menu__active");
     updateMenuAttributes(true);
-    // А11у-бонус: переводим фокус на кнопку закрытия или первую ссылку внутри меню
+    // move focus to the close button or the first link inside the menu
     closeButton.focus();
   });
 
   closeButton.addEventListener("click", () => {
     body.classList.remove("menu__active");
     updateMenuAttributes(false);
-    // А11у-бонус: возвращаем фокус на кнопку открытия, чтобы пользователь не потерялся
+    // return focus to the open button so the user doesn't get lost
     openButton.focus();
   });
 
-  // Закрытие по кнопке Escape
+  // Close on Escape key press
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && body.classList.contains("menu__active")) {
       body.classList.remove("menu__active");
       updateMenuAttributes(false);
-      openButton.focus(); // Возвращаем фокус
+      // Возвращаем фокус
+      openButton.focus();
     }
   });
 }
@@ -41,35 +42,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function emailValidate() {
   const roots = document.querySelectorAll(".form__email");
-  if (!roots.length) return; // Проверяем, нашлись ли формы вообще
+  // Check if any forms were found at all
+  if (!roots.length) return;
 
   roots.forEach((root) => {
-    // Используем querySelector, так как внутри КАЖДОЙ формы только ОДИН input, ОДНА ошибка и ОДНА кнопка
+    // We use querySelector, since inside EACH form there is only ONE input, ONE error and ONE button
     const emailInput =
       root.querySelector('input[type="email"]') || root.querySelector("#email");
     const errorMsg = root.querySelector(".error-msg");
     const emailSubmit =
       root.querySelector(".email-btn") || root.querySelector("#email-btn");
 
-    // Защита: если в какой-то из форм не хватает элементов, пропускаем её, чтобы не было ошибок
+    // Safety check: if any form is missing elements, skip it to avoid errors.
     if (!emailInput || !errorMsg || !emailSubmit) return;
 
-    // Регулярное выражение для проверки email
+    // Regular expression for email validation
     const mailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    // Функция для скрытия ошибки
+    // Function to hide the error
     function setValid() {
       errorMsg.style.display = "none";
       emailInput.style.borderColor = "";
     }
 
-    // Функция для показа ошибки
+    // Function to display an error
     function setInvalid() {
       errorMsg.style.display = "block";
       emailInput.style.borderColor = "red";
     }
 
-    // Проверка при каждом вводе символа
+    // Check on every character input
     emailInput.addEventListener("input", () => {
       if (emailInput.value === "" || mailRegex.test(emailInput.value)) {
         setValid();
@@ -78,115 +80,22 @@ function emailValidate() {
       }
     });
 
-    // Проверка при клике на кнопку отправки (теперь без forEach, так как кнопка одна внутри текущей формы)
+    // Check upon clicking the submit button (no longer using forEach, since there is only one button within the current form)
     emailSubmit.addEventListener("click", (event) => {
-      event.preventDefault(); // Отменяем отправку формы для проверки
+      // Prevent form submission for validation
+      event.preventDefault();
 
       if (!mailRegex.test(emailInput.value)) {
         setInvalid();
       } else {
         setValid();
-        // Здесь можно отправить конкретную форму: root.submit();
+        // You can submit a specific form here: root.submit();
       }
     });
   });
 }
 
 emailValidate();
-
-// function contactFormValidate() {
-//   // Другой класс формы
-//   const form = document.querySelector(".contact__form");
-//   // Если этой формы нет на текущей странице — выходим!
-//   if (!form) return;
-
-//   // Ищем элементы именно этой новой формы
-//   const nameInput = form.querySelector("#name");
-//   const emailAdress = form.querySelector("#emailAdress");
-//   const messageText = form.querySelector("#message");
-//   const submitBtn = form.querySelector("button[type='submit']");
-//   // console.log(nameInput, emailAdress, messageText, submitBtn);
-
-//   form.addEventListener("submit", (event) => {
-//     event.preventDefault();
-//     const isRequiredValid = checkRequired([
-//       nameInput,
-//       emailAdress,
-//       messageText,
-//     ]);
-
-//     let isEmailValid = isRequiredValid;
-//     if (isRequiredValid) {
-//       const isNameInputValid = checkLength(nameInput, 3, 15);
-//       const isEmailValid = checkEmail(emailAdress);
-//       const isMessageValid = checkLength(messageText, 3);
-
-//       isFormValid = isNameInputValid && isEmailValid && isMessageValid;
-
-//       if (isFormValid) {
-//         document.querySelectorAll(".form-group").forEach((group) => {
-//           group.classList = "form-group";
-//         });
-//       }
-//     }
-
-//     // Проверка Email
-//     function checkEmail(emailAdress) {
-//       const mailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-//       if (mailRegex.test(emailAdress.value.trim())) {
-//         showSuccess(emailAdress);
-//         return true;
-//       } else {
-//         showError(emailAdress, `Please use a valid email address`);
-//         return false;
-//       }
-//     }
-
-//     // Проверка имени
-//     function checkLength(input, min, max) {
-//       if (input.value.length < min) {
-//         showError(input, `Name must be at least ${min} charters`);
-//         return false;
-//       } else if (input.value.length > max) {
-//         showError(input, `Name must be less than ${max} charters`);
-//         return false;
-//       } else {
-//         showSuccess(input);
-//         return true;
-//       }
-//     }
-
-//     function checkRequired(inputArray) {
-//       let isValid = true;
-
-//       inputArray.forEach((input) => {
-//         if (input.value.trim() === "") {
-//           showError(input, `This field can't be empty`);
-//           isValid = false;
-//         } else {
-//           showSuccess(input);
-//         }
-//       });
-//       return isValid;
-//     }
-
-//     function showError(input, message) {
-//       const formGroup = input.parentElement;
-//       formGroup.className = "form-group error";
-//       const small = formGroup.querySelector("small");
-//       small.innerText = message;
-//     }
-
-//     function showSuccess(input) {
-//       const formGroup = input.parentElement;
-//       // добавляем класс success
-//       formGroup.className = "form-group success";
-//     }
-//   });
-// }
-
-
-// contactFormValidate();
 
 function contactFormValidate() {
   const form = document.querySelector(".contact__form");
@@ -199,23 +108,27 @@ function contactFormValidate() {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    // 1. Сначала проверяем обязательные поля на пустоту
-    const isRequiredValid = checkRequired([nameInput, emailAdress, messageText]);
+    // First, check mandatory fields for emptiness
+    const isRequiredValid = checkRequired([
+      nameInput,
+      emailAdress,
+      messageText,
+    ]);
 
-    // 2. Если все поля заполнены, делаем детальную валидацию формата
+    // If all fields are filled in, perform detailed format validation.
     if (isRequiredValid) {
       const isNameInputValid = checkLength(nameInput, 3, 15, "Name");
       const isEmailValid = checkEmail(emailAdress);
-      // Передаем min=3, max=Infinity (чтобы сообщение могло быть любой длины) и имя поля "Message"
+      // Pass min=3, max=Infinity (so the message can be of any length) and the field name "Message"
       const isMessageValid = checkLength(messageText, 3, Infinity, "Message");
 
-      // ИСПРАВЛЕНО: заменили минус на знак равенства и добавили const
       const isFormValid = isNameInputValid && isEmailValid && isMessageValid;
 
       if (isFormValid) {
-        alert("Form submitted successfully!"); // Для теста
-        
-        // Очищаем форму и убираем классы успехов/ошибок
+       // For testing
+        alert("Form submitted successfully!"); 
+
+        // Clear the form and remove success/error classes
         form.reset();
         document.querySelectorAll(".form-group").forEach((group) => {
           group.classList.remove("error", "success");
@@ -235,7 +148,7 @@ function contactFormValidate() {
     }
   }
 
-  // ИСПРАВЛЕНО: добавили аргумент fieldName для красивого вывода ошибок
+  // added the fieldName argument for nicely formatted error output
   function checkLength(input, min, max, fieldName) {
     const valueLength = input.value.trim().length;
 
