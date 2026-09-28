@@ -125,8 +125,8 @@ function contactFormValidate() {
       const isFormValid = isNameInputValid && isEmailValid && isMessageValid;
 
       if (isFormValid) {
-       // For testing
-        alert("Form submitted successfully!"); 
+        // For testing
+        alert("Form submitted successfully!");
 
         // Clear the form and remove success/error classes
         form.reset();
@@ -179,10 +179,15 @@ function contactFormValidate() {
   }
 
   function showError(input, message) {
+    // const formGroup = input.parentElement;
+    // formGroup.className = "form-group error";
+    // const small = formGroup.querySelector("small");
+    // small.innerText = message;
     const formGroup = input.parentElement;
-    formGroup.className = "form-group error";
-    const small = formGroup.querySelector("small");
-    small.innerText = message;
+    formGroup.classList.remove("success");
+    formGroup.classList.add("error");
+    input.setAttribute("aria-invalid", "true");
+    formGroup.querySelector("small").textContent = message;
   }
 
   function showSuccess(input) {
